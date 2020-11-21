@@ -7,26 +7,24 @@ app.set("view engine", "ejs");
 app.use(express.static(join(__dirname, 'public')));
 app.use(cookieParser());
 
-const getLocales = (request, response) => {
+const getLocales = (component, request, response) => {
     if (!request.cookies.lang) {
         let lang = (request.acceptsLanguages("en-GB", "pl-PL") || "en-GB")
         response.cookie("lang", lang)
-        return require("./locales/"+lang);
+        return require(join(__dirname + `/locales/${lang}/${component}.json`));
     } else {
-        return require("./locales/"+request.cookies.lang)
+        return require(join(__dirname + `/locales/${request.cookies.lang}/${component}.json`))
     }
 }
 
 app.get("/login", (req, res) => {
     res.render(join(__dirname + "/pages/login"), {
-        locales: getLocales(req, res)
+        locales: getLocales("login", req, res)
     });
 })
 
 app.get("/", (req, res) => {
-    res.render(join(__dirname + "/pages/index"), {
-        locales: getLocales(req, res)
-    });
+    res.render(join(__dirname + "/pages/index"), {});
 });
 
 app.listen(8080);
