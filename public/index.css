@@ -1,0 +1,163 @@
+:root {
+    --font-stack: "Inter", "Poppins", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: rgb(30,30,30);
+    color: white;
+    font-family: var(--font-stack);
+    user-select: none;
+    text-align: center;
+    margin: 0;
+}
+
+header {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+}
+
+header h1 {
+    font-size: 3.5rem;
+    animation-name: logoWelcome;
+    animation-duration: 1.5s;
+    animation-iteration-count: 1;
+    margin-bottom: 0px;
+    font-weight: 600;
+}
+
+h3 {
+    margin-top: 0px;
+    margin-bottom: 2px;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+@keyframes logoWelcome {
+    0% {
+        color: #1A202C;
+        opacity: 0.2;
+    }
+
+    15% {
+        color: #2D3748;
+    }
+
+    30% {
+        color: #4A5568;
+    }
+
+    60% {
+        color: #A0AEC0;
+    }
+
+    80% {
+        color: #E2E8F0;
+    }
+
+    100% {
+        color: white;
+        opacity: 1;
+    }
+}
+
+main {
+    width: 100%;
+    background: linear-gradient(180deg, rgba(30,30,30,1) 0%, #2D3748 26%, #2D3748 100%); 
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    opacity: 0;
+    transition: opacity 0.75s;
+}
+
+.actualcontent {
+    margin-top: 25%;
+}
+
+.convince-text {
+    font-size: 2.5em;
+    font-weight: 500;
+    animation-name: emergeConvinceText;
+    animation-duration: 1.5s;
+    animation-iteration-count: 1;
+    margin-bottom: 0;
+}
+
+.convince-text span {
+    font-weight: 800;
+    color: #4FD1C5;
+}
+
+@keyframes emergeConvinceText {
+    0% {
+        letter-spacing: 0.296em;
+    }
+    100% {
+        letter-spacing: 0em;
+    }
+}
+
+.mostplatforms {
+    margin-top: 60px;
+    font-size: 2.2em;
+    font-weight: 600;
+}
+
+button {
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #3B82F6;
+    padding: 12px 18px 12px 18px;
+    font-size: 17px;
+    color: white;
+    font-family: var(--font-stack);
+}
+
+.mostplatforms svg {
+    font-size: 80px;
+    padding-bottom: 10px;
+}
+
+.dotomuch {
+    font-weight: 800;
+    color: #F56565;
+}
+
+#arrow_lookdown {
+    position: absolute;
+    top: calc(100% - 125px);
+    transition: opacity 0.5s;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-name: arrowBounce;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    font-size: 30px;
+}
+
+@keyframes arrowBounce {
+    0% {
+        top: calc(100% - 125px);
+    }
+    40% {
+        top: calc(100% - 125px);
+    }
+    50% {
+        top: calc(100% - 90px);
+    }
+    60% {
+        top: calc(100% - 125px);
+    }
+    100% {
+        top: calc(100% - 125px);
+    }
+}
+
+
+footer {
+    margin-top: 25%;
+}
