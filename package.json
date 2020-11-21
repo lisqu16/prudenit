@@ -1,0 +1,20 @@
+{
+  "name": "prudenit",
+  "version": "1.0.0",
+  "description": "A fast/light, safe text comunicator, which doesn't try to pretend Messenger, or any kind of stupid platform. It's code is open-source, and not bloat.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "@lisqu16/prudenit"
+  },
+  "author": "@lisqu16, @ProgramistaZpolski, @TheTrollErrorsGuy65",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+  }
+}
