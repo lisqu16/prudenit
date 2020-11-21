@@ -13,6 +13,7 @@
   "author": "@lisqu16, @ProgramistaZpolski, @TheTrollErrorsGuy65",
   "license": "Apache-2.0",
   "dependencies": {
+    "cookie-parser": "^1.4.5",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "path": "^0.12.7"
