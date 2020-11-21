@@ -1,3 +1,4 @@
+
 function s(element) {
     return document.querySelector(element);
 }
@@ -33,4 +34,21 @@ function login() {
         }, 450);
 
     }, 500);
+}
+
+function loadPage(page) {
+    s("#pageload_bar").style.opacity = 1;
+    s("#pageload_bar").style.width = "10px"
+    fetch(page)
+    .then(h => {
+        h.text().then(html => {
+            document.body.innerHTML = html.split("<body>")[1].split("</body>")[0] // nie lepiej poprostu przekierować użytkownika na stronę?
+            s("#pageload_bar").style.width = "100%"
+            setTimeout(function() {
+                s("#pageload_bar").style.opacity = 0;
+            }, 100)
+        })
+        // :thinking:
+        // zobaczę takie coś najpierw, jak nie będzie to dobrze działać to zwykły redirect
+    })
 }

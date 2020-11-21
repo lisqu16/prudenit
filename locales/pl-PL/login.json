@@ -2,5 +2,7 @@
     "signin": "Zaloguj się",
     "password": "Hasło",
     "register": "Zarejestruj się",
-    "passwordreset": "Przywróć hasło"
+    "passwordreset": "Przywróć hasło",
+    "username": "Nazwa użytkownika",
+    "repassword": "Powtórz hasło"
 }

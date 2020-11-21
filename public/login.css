@@ -21,6 +21,10 @@ body {
     overflow: hidden;
 }
 
+#login_page[h="register"] {
+    width: 500px;
+}
+
 * {
     transition: all 0.3s;
 }
@@ -56,7 +60,7 @@ input:focus {
     border-bottom: #3182CE solid 2px;
 }
 
-button {
+button, input[type="submit"] {
     margin-top: 20px;
     border: none;
     outline: none;
@@ -70,6 +74,7 @@ button {
     transition: 0.2s;
     font-family: var(--font-stack);
     box-shadow: 0px 2px 3px rgba(109, 109, 109, 0.2);
+    width: fit-content;
 }
 
 button:hover, button:focus {
@@ -108,4 +113,18 @@ button:hover, button:focus {
 
 #links a:hover {
     color: #5A9BD8;
+}
+
+#pageload_bar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 0px;
+    height: 3px;
+    background: #5A9BD8;
+    margin: 0px 0px;
+}
+
+form[action="/auth/register/"] input[type="text"], form[action="/auth/register/"] input[type="password"] {
+    width: 500px;
 }

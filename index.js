@@ -1,11 +1,34 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+
+const rethinkdb = require("rethinkdb");
 const { join } = require("path");
+const { rethinkdb: { host, port, user, password } } = require("./config.json");
+
+// connecting with database
+let connection;
+rethinkdb.connect({
+    host: host,
+    port: port,
+    user: user,
+    password: password
+}, function (err, conn) {
+    if (err) {
+        console.error(err);
+        process.exit(1);
+    }
+    connection = conn;
+});
 
 const app = express();
-app.set("view engine", "ejs");
 app.use(express.static(join(__dirname, 'public')));
+
+app.set("view engine", "ejs");
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({
+    extended: true
+})); 
 
 const getLocales = (component, request, response) => {
     if (!request.cookies.lang) {
@@ -17,14 +40,26 @@ const getLocales = (component, request, response) => {
     }
 }
 
+app.use("/auth/", (req, res, next) => {
+    req.db = connection;
+    next();
+}, require("./api/auth.js"));
+
 app.get("/login", (req, res) => {
     res.render(join(__dirname + "/pages/login"), {
         locales: getLocales("login", req, res)
     });
 })
+app.get("/register", (req, res) => {
+    res.render(join(__dirname + "/pages/register"), {
+        locales: getLocales("login", req, res)
+    });
+})
 
 app.get("/", (req, res) => {
-    res.render(join(__dirname + "/pages/index"), {});
+    res.render(join(__dirname + "/pages/index"), {
+        locales: getLocales("index", req, res)
+    });
 });
 
 app.listen(8080);

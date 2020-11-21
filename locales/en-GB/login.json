@@ -2,5 +2,7 @@
     "signin": "Sign in",
     "password": "Password",
     "register": "Register",
-    "passwordreset": "Reset your password"
+    "passwordreset": "Reset your password",
+    "username": "Username",
+    "repassword": "Repeat password"
 }

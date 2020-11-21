@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html lang="pl">
-
 <head>
     <title>Prudenit</title>
     <meta charset="UTF-8">
@@ -18,27 +17,29 @@
         <p class="dot" style="left: 60px;"></p>
     </div>
     <main>
-        
-        <div id="login_page">
+        <div id="login_page" h="register">
             <h1>
-                <%= locales.signin %>
+                <%= locales.register %>
             </h1>
-            <form action="/auth/login" method="POST">
+            <form action="/auth/register/" method="POST">
                 <div id="content">
-                    <input type="text" autocomplete="off" id="email" reqiured placeholder="E-mail"><br>
-                    <input type="password" autocomplete="off" id="password" reqiured placeholder=<%=locales.password %>>
+                    <input type="text" name="email" autocomplete="off" id="email" reqiured placeholder="E-mail"><br>
+                    <input type="text" name="username" autocomplete="off" id="username" reqiured placeholder=<%=locales.username%>><br>
+                    <input type="password" name="password" autocomplete="off" id="password" reqiured placeholder=<%=locales.password %>>
+                    <input type="password" name="repassword" autocomplete="off" id="password-repeat" reqiured placeholder="<%= locales.repassword %>">
                 </div>
                 <div id="links">
-                    <a href="#" onclick="loadPage('/register/')">
-                        <%= locales.register %>
+                    <a href="#" onclick="loadPage('/login/')">
+                        <%= locales.signin %>
                     </a>
                     |
                     <a href="#">
                         <%= locales.passwordreset %>
                     </a>
                 </div>
-                <input type="submit" id="login" onclick="login();" value="<%= locales.signin %>"></input>
+                <input type="submit" id="login" onclick="login();" value="<%= locales.register %>"></input>
             </form>
+            
         </div>
     </main>
     <script src="login.js"></script>
