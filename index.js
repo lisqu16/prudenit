@@ -27,4 +27,4 @@ app.get("/", (req, res) => {
     res.render(join(__dirname + "/pages/index"), {});
 });
 
-app.listen(1337);
+app.listen(8080);
