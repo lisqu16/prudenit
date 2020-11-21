@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+
+<head>
+    <title>Prudenit</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div id="loading_anim">
+        <p class="dot" style="left: 0px;"></p>
+        <p class="dot" style="left: 20px;"></p>
+        <p class="dot" style="left: 40px;"></p>
+        <p class="dot" style="left: 60px;"></p>
+    </div>
+    <main>
+        <div id="login_page">
+            <h1>
+                <%= locales.signin %>
+            </h1>
+            <div id="content">
+                <input type="text" autocomplete="off" id="email" reqiured placeholder="E-mail"><br>
+                <input type="password" autocomplete="off" id="password" reqiured placeholder=<%=locales.password %>>
+            </div>
+            <div id="links">
+                <a href="#">
+                    <%= locales.register %>
+                </a>
+                |
+                <a href="#">
+                    <%= locales.passwordreset %>
+                </a>
+            </div>
+            <button type="submit" id="login" onclick="login();">
+                <%= locales.signin %>
+            </button>
+        </div>
+    </main>
+    <script src="login.js"></script>
+</body>
+
+</html>
