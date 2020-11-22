@@ -4,5 +4,12 @@
     "register": "Zarejestruj się",
     "passwordreset": "Przywróć hasło",
     "username": "Nazwa użytkownika",
-    "repassword": "Powtórz hasło"
+    "repassword": "Powtórz hasło",
+    "wrongEmail": "Podano nieprawidłowy adres e-mail!",
+    "wrongUsernameLength": "Nazwa użytkownika jest za krótka, lub za długa!\nPowinna mieć przynajmniej 2 znaków i maksymalnie 48 znaków!",
+    "differentPasswords": "Hasła nie są takie same!",
+    "tooShortPassword": "Hasło jest za krótkie! Powinno mieć przynajmniej 8 znaków!",
+    "withoutNumberPassword": "Hasło powinno zawierać, przynajmniej jedną cyfrę!",
+    "commonlyUsedPassword": "Twoje hasło, jest zbyt powszechnie używane!",
+    "alreadyAssignedEmail": "Ten adres e-mail jest obecnie przypisany do innego konta!"
 }

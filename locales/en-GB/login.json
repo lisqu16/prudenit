@@ -4,5 +4,12 @@
     "register": "Register",
     "passwordreset": "Reset your password",
     "username": "Username",
-    "repassword": "Repeat password"
+    "repassword": "Repeat password",
+    "wrongEmail": "Incorrect email address was provided!",
+    "wrongUsernameLength": "Username is too short, or too long!\nIt should have a minimum of 2 characters and a maximum of 48 characters!",
+    "differentPasswords": "Passwords are not the same!",
+    "tooShortPassword": "Password is too short! It should have at least 8 characters!",
+    "withoutNumberPassword": "Your password should have at least one number!",
+    "commonlyUsedPassword": "Your password is too commonly used!",
+    "alreadyAssignedEmail": "This email adress is already assigned to another account!"
 }

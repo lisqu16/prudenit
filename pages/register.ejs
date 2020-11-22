@@ -28,6 +28,11 @@
                     <input type="password" name="password" autocomplete="off" id="password" reqiured placeholder=<%=locales.password %>>
                     <input type="password" name="repassword" autocomplete="off" id="password-repeat" reqiured placeholder="<%= locales.repassword %>">
                 </div>
+                <% if (errors.length != 0) { %>
+                    <% errors.forEach(err => { %>
+                        <span class="error"><%= locales[err] %></span> <br />
+                    <% }); %>
+                <% } %>
                 <div id="links">
                     <a href="#" onclick="loadPage('/login/')">
                         <%= locales.signin %>

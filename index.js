@@ -4,15 +4,16 @@ const bodyParser = require("body-parser");
 
 const rethinkdb = require("rethinkdb");
 const { join } = require("path");
-const { rethinkdb: { host, port, user, password } } = require("./config.json");
+const { rethinkdb: { host, port, user, password, db } } = require("./config.json");
 
 // connecting with database
 let connection;
 rethinkdb.connect({
-    host: host,
-    port: port,
-    user: user,
-    password: password
+    host,
+    port,
+    user,
+    password,
+    db
 }, function (err, conn) {
     if (err) {
         console.error(err);
@@ -40,7 +41,7 @@ const getLocales = (component, request, response) => {
     }
 }
 
-app.use("/auth/", (req, res, next) => {
+app.use("/auth/", async (req, res, next) => {
     req.db = connection;
     next();
 }, require("./api/auth.js"));
@@ -51,8 +52,14 @@ app.get("/login", (req, res) => {
     });
 })
 app.get("/register", (req, res) => {
+    var errors = [];
+    if (req.cookies.errors) {
+        errors = req.cookies.errors;
+        res.clearCookie("errors");
+    }
     res.render(join(__dirname + "/pages/register"), {
-        locales: getLocales("login", req, res)
+        locales: getLocales("login", req, res),
+        errors
     });
 })
 

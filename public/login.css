@@ -127,3 +127,8 @@ button:hover, button:focus {
 form[action="/auth/register/"] input[type="text"], form[action="/auth/register/"] input[type="password"] {
     width: 500px;
 }
+
+.error {
+    color: red;
+    font-size: 12px;
+}
