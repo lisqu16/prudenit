@@ -32,11 +32,16 @@ app.use(bodyParser.urlencoded({
 })); 
 
 const getLocales = (component, request, response) => {
+    var langs = ["en-GB", "pl-PL"];
     if (!request.cookies.lang) {
-        let lang = (request.acceptsLanguages("en-GB", "pl-PL") || "en-GB")
+        let lang = (request.acceptsLanguages(langs) || "en-GB")
         response.cookie("lang", lang)
         return require(join(__dirname + `/locales/${lang}/${component}.json`));
     } else {
+        if (!langs.includes(request.cookies.lang)) {
+            response.cookie("lang", "en-GB");
+            return require(join(__dirname + `/locales/en-GB/${component}.json`));
+        }
         return require(join(__dirname + `/locales/${request.cookies.lang}/${component}.json`))
     }
 }
@@ -52,10 +57,13 @@ app.get("/login", (req, res) => {
     });
 })
 app.get("/register", (req, res) => {
-    var errors = [];
-    if (req.cookies.errors) {
-        errors = req.cookies.errors;
-        res.clearCookie("errors");
+    let errors = [];
+    if (req.query.err) {
+        let errorCodes = req.query.err.split("​");
+        let errorsList = ["wrongEmail", "wrongUsernameLength", "differentPasswords",
+                        "tooShortPassword", "withoutNumberPassword", "commonlyUsedPassword", "alreadyAssignedEmail"];
+        errorCodes.forEach(code => errors.push(errorsList[code-1]));
+        delete errorCodes;
     }
     res.render(join(__dirname + "/pages/register"), {
         locales: getLocales("login", req, res),

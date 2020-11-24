@@ -27,17 +27,17 @@ router.post("/register/", async (req, res) => {
         // email check
         if (req.body.email == "" 
             || !(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(req.body.email)))
-            errors.push("wrongEmail");
+            errors.push(1); 
 
         // username check
         if (req.body.username.length <= 1 || req.body.username.length > 48)
-            errors.push("wrongUsernameLength");
+            errors.push(2); 
 
         // password check
-        if (req.body.password !== req.body.repassword) errors.push("differentPasswords");
-        if (!(req.body.password.length >= 8)) errors.push("tooShortPassword");
-        if (!(/\d/.test(req.body.password))) errors.push("withoutNumberPassword");
-        if (notAllowedPhrases.indexOf(req.body.password.toLowerCase()) > -1) errors.push("commonlyUsedPassword");
+        if (req.body.password !== req.body.repassword) errors.push(3);
+        if (!(req.body.password.length >= 8)) errors.push(4); 
+        if (!(/\d/.test(req.body.password))) errors.push(5); 
+        if (notAllowedPhrases.indexOf(req.body.password.toLowerCase()) > -1) errors.push(6);
 
         // checking if email already exists in database
         r.table("users")
@@ -47,11 +47,10 @@ router.post("/register/", async (req, res) => {
             if (err) throw new Error("An unexcepted error occured!");
             cursor.toArray(function(err, result) {
                 if (result.length > 0) {
-                    errors.push("alreadyAssignedEmail");
+                    errors.push(7);
                 }
                 if (errors.length !== 0) {
-                    res.cookie("errors", errors)
-                    return res.redirect("/register");
+                    return res.redirect(`/register?err=${errors.join("​")}`);
                 } else {
                     // hashing password
                     let password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
