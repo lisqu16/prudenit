@@ -12,6 +12,7 @@ router.post("/", (req, res) => {
         errors.forEach(code => errs.push(errorsList[code-1]));
         return res.render("login", {
             locales: req.locales,
+            email: req.body.email,
             errs
         });
     }

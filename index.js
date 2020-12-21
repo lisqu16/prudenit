@@ -59,12 +59,15 @@ app.use("/auth/register", async (req, res, next) => {
 app.get("/login", (req, res) => {
     res.render("login", {
         locales: req.locales,
+        email: "",
         errs: []
     });
 })
 app.get("/register", (req, res) => {
     res.render("register", {
         locales: req.locales,
+        email: "",
+        username: "",
         errs: [],
         sitekey
     });

@@ -24,7 +24,10 @@
             </h1>
             <form action="/auth/login" method="POST">
                 <div id="content">
-                    <input type="text" name="email" autocomplete="off" id="email" reqiured placeholder="E-mail"><br>
+                    <input type="text" name="email" autocomplete="off" id="email" reqiured placeholder="E-mail" 
+                    <% if (email != "") {%>
+                        value=<%= email %>
+                    <% } %>><br>
                     <input type="password" name="password" autocomplete="off" id="password" reqiured placeholder=<%=locales.password %>>
                 </div>
                 <div id="links">

@@ -30,6 +30,8 @@ router.post("/", async (req, res) => {
         errors.forEach(code => errs.push(errorsList[code-1]));
         return res.render("register", {
             locales: req.locales,
+            email: req.body.email,
+            username: req.body.username,
             errs,
             sitekey
         });

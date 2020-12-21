@@ -23,8 +23,14 @@
             </h1>
             <form action="/auth/register/" method="POST">
                 <div id="content">
-                    <input type="text" name="email" autocomplete="off" id="email" reqiured placeholder="E-mail"><br>
-                    <input type="text" name="username" autocomplete="off" id="username" reqiured placeholder=<%=locales.username%>><br>
+                    <input type="text" name="email" autocomplete="off" id="email" reqiured placeholder="E-mail"
+                    <% if (email != "") {%>
+                        value=<%= email %>
+                    <% } %>><br>
+                    <input type="text" name="username" autocomplete="off" id="username" reqiured placeholder=<%=locales.username%>
+                    <% if (username != "") {%>
+                        value=<%= username %>
+                    <% } %>><br>
                     <input type="password" name="password" autocomplete="off" id="password" reqiured placeholder=<%=locales.password %>>
                     <input type="password" name="repassword" autocomplete="off" id="password-repeat" reqiured placeholder="<%= locales.repassword %>">
                 </div>
