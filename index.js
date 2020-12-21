@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 
 const rethinkdb = require("rethinkdb");
 const { join } = require("path");
-const { rethinkdb: { host, port, user, password, db } } = require("./config.json");
+const { rethinkdb: { host, port, user, password, name }, captcha: { sitekey } } = require("./config.js");
 
 // connecting with database
 let connection;
@@ -13,7 +13,7 @@ rethinkdb.connect({
     port,
     user,
     password,
-    db
+    db: name
 }, function (err, conn) {
     if (err) {
         console.error(err);
@@ -31,49 +31,48 @@ app.use(bodyParser.urlencoded({
     extended: true
 })); 
 
-const getLocales = (component, request, response) => {
+app.use("/*", async (req, res, next) => {
     var langs = ["en-GB", "pl-PL"];
-    if (!request.cookies.lang) {
-        let lang = (request.acceptsLanguages(langs) || "en-GB")
-        response.cookie("lang", lang)
-        return require(join(__dirname + `/locales/${lang}/${component}.json`));
+    if (!req.cookies.lang) {
+        let lang = (req.acceptsLanguages(langs) || "en-GB")
+        res.cookie("lang", lang)
+        req.locales = require(join(__dirname + `/locales/${lang}.json`));
+    } else if (!langs.includes(req.cookies.lang)) {
+            res.cookie("lang", "en-GB");
+            req.locales = require(join(__dirname + `/locales/en-GB.json`));
     } else {
-        if (!langs.includes(request.cookies.lang)) {
-            response.cookie("lang", "en-GB");
-            return require(join(__dirname + `/locales/en-GB/${component}.json`));
-        }
-        return require(join(__dirname + `/locales/${request.cookies.lang}/${component}.json`))
+        req.locales = require(join(__dirname + `/locales/${req.cookies.lang}.json`));
     }
-}
+    next();
+});
 
-app.use("/auth/", async (req, res, next) => {
+app.use("/auth/login", async (req, res, next) => {
     req.db = connection;
     next();
-}, require("./api/auth.js"));
+}, require("./routes/user/login.js"));
+
+app.use("/auth/register", async (req, res, next) => {
+    req.db = connection;
+    next();
+}, require("./routes/user/register.js"));
 
 app.get("/login", (req, res) => {
-    res.render(join(__dirname + "/pages/login"), {
-        locales: getLocales("login", req, res)
+    res.render("login", {
+        locales: req.locales,
+        errs: []
     });
 })
 app.get("/register", (req, res) => {
-    let errors = [];
-    if (req.query.err) {
-        let errorCodes = req.query.err.split("​");
-        let errorsList = ["wrongEmail", "wrongUsernameLength", "differentPasswords",
-                        "tooShortPassword", "withoutNumberPassword", "commonlyUsedPassword", "alreadyAssignedEmail"];
-        errorCodes.forEach(code => errors.push(errorsList[code-1]));
-        delete errorCodes;
-    }
-    res.render(join(__dirname + "/pages/register"), {
-        locales: getLocales("login", req, res),
-        errors
+    res.render("register", {
+        locales: req.locales,
+        errs: [],
+        sitekey
     });
 })
 
 app.get("/", (req, res) => {
-    res.render(join(__dirname + "/pages/index"), {
-        locales: getLocales("index", req, res)
+    res.render("index", {
+        locales: req.locales
     });
 });
 

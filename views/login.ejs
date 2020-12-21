@@ -1,12 +1,11 @@
 <!DOCTYPE HTML>
-<html lang="pl">
+<html>
 
 <head>
     <title>Prudenit</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
@@ -25,8 +24,8 @@
             </h1>
             <form action="/auth/login" method="POST">
                 <div id="content">
-                    <input type="text" autocomplete="off" id="email" reqiured placeholder="E-mail"><br>
-                    <input type="password" autocomplete="off" id="password" reqiured placeholder=<%=locales.password %>>
+                    <input type="text" name="email" autocomplete="off" id="email" reqiured placeholder="E-mail"><br>
+                    <input type="password" name="password" autocomplete="off" id="password" reqiured placeholder=<%=locales.password %>>
                 </div>
                 <div id="links">
                     <a href="#" onclick="loadPage('/register/')">
@@ -37,11 +36,16 @@
                         <%= locales.passwordreset %>
                     </a>
                 </div>
+                <% if (errs.length != 0) { %>
+                    <% errs.forEach(err => { %>
+                        <span class="error"><%= locales[err] %></span> <br />
+                    <% }); %>
+                <% } %>
                 <input type="submit" id="login" onclick="login();" value="<%= locales.signin %>"></input>
             </form>
         </div>
     </main>
-    <script src="login.js"></script>
+    <script src="/js/login.js"></script>
 </body>
 
 </html>

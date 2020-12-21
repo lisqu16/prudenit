@@ -18,6 +18,8 @@ function login() {
     setTimeout(function () {
         s("#login_page").style.padding = "0px 0px";
         s("#login_page").style.height = "0px";
+
+        s("#overlay").style.display = "block"
     }, 350);
 
 
@@ -42,13 +44,16 @@ function loadPage(page) {
     fetch(page)
     .then(h => {
         h.text().then(html => {
-            document.body.innerHTML = html.split("<body>")[1].split("</body>")[0] // nie lepiej poprostu przekierować użytkownika na stronę?
+            document.body.innerHTML = html.split("<body>")[1].split("</body>")[0]
             s("#pageload_bar").style.width = "100%"
             setTimeout(function() {
                 s("#pageload_bar").style.opacity = 0;
             }, 100)
         })
-        // :thinking:
-        // zobaczę takie coś najpierw, jak nie będzie to dobrze działać to zwykły redirect
     })
+}
+
+function done() {
+    s("#overlay").style.display = "none";
+    s("#overlay").style.opacity = 0;
 }

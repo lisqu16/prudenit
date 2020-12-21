@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
-<html lang="pl">
+<html>
 <head>
     <title>Prudenit</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://hcaptcha.com/1/api.js"></script>
 </head>
 
 <body>
@@ -28,8 +28,8 @@
                     <input type="password" name="password" autocomplete="off" id="password" reqiured placeholder=<%=locales.password %>>
                     <input type="password" name="repassword" autocomplete="off" id="password-repeat" reqiured placeholder="<%= locales.repassword %>">
                 </div>
-                <% if (errors.length != 0) { %>
-                    <% errors.forEach(err => { %>
+                <% if (errs.length != 0) { %>
+                    <% errs.forEach(err => { %>
                         <span class="error"><%= locales[err] %></span> <br />
                     <% }); %>
                 <% } %>
@@ -42,12 +42,18 @@
                         <%= locales.passwordreset %>
                     </a>
                 </div>
+
+                <input type="checkbox" id="bot" onclick="document.querySelector('#overlay').style.display = 'block'" name="acc" style="width: 20px;position: relative;top: 2.5px;margin: 0px 0px;">
+                <label for="bot"><%= locales.robot %></label><br>
+                
                 <input type="submit" id="login" onclick="login();" value="<%= locales.register %>"></input>
+                <div id="overlay" style="display: none;">
+                    <div class="h-captcha" data-sitekey="<%= sitekey %>" data-theme="dark" data-callback="done"></div>
+                </div>
             </form>
-            
         </div>
     </main>
-    <script src="login.js"></script>
+    <script src="/js/login.js"></script>
 </body>
 
 </html>
