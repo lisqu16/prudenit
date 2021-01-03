@@ -21,7 +21,7 @@
             <h1>
                 <%= locales.register %>
             </h1>
-            <form action="/auth/register/" method="POST">
+            <form method="POST">
                 <div id="content">
                     <input type="text" name="email" autocomplete="off" id="email" reqiured placeholder="E-mail"
                     <% if (email != "") {%>
@@ -49,13 +49,13 @@
                     </a>
                 </div>
 
-                <input type="checkbox" id="bot" onclick="document.querySelector('#overlay').style.display = 'block'" name="acc" style="width: 20px;position: relative;top: 2.5px;margin: 0px 0px;">
-                <label for="bot"><%= locales.robot %></label><br>
+                <!--<input type="checkbox" id="bot" onclick="document.querySelector('#overlay').style.display = 'block'" name="acc" style="width: 20px;position: relative;top: 2.5px;margin: 0px 0px;">
+                <label for="bot"> locales.robot </label><br>-->
                 
                 <input type="submit" id="login" onclick="login();" value="<%= locales.register %>"></input>
-                <div id="overlay" style="display: none;">
-                    <div class="h-captcha" data-sitekey="<%= sitekey %>" data-theme="dark" data-callback="done"></div>
-                </div>
+                <!--<div id="overlay" style="display: none;">
+                    <div class="h-captcha" data-sitekey="sitekey" data-theme="dark" data-callback="done"></div>
+                </div>-->
             </form>
         </div>
     </main>

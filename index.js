@@ -1,26 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-
-const rethinkdb = require("rethinkdb");
 const { join } = require("path");
-const { rethinkdb: { host, port, user, password, name }, captcha: { sitekey } } = require("./config.js");
-
-// connecting with database
-let connection;
-rethinkdb.connect({
-    host,
-    port,
-    user,
-    password,
-    db: name
-}, function (err, conn) {
-    if (err) {
-        console.error(err);
-        process.exit(1);
-    }
-    connection = conn;
-});
 
 const app = express();
 app.use(express.static(join(__dirname, 'public')));
@@ -46,15 +27,8 @@ app.use("/*", async (req, res, next) => {
     next();
 });
 
-app.use("/auth/login", async (req, res, next) => {
-    req.db = connection;
-    next();
-}, require("./routes/user/login.js"));
-
-app.use("/auth/register", async (req, res, next) => {
-    req.db = connection;
-    next();
-}, require("./routes/user/register.js"));
+app.use("/login", require("./routes/user/login.js"));
+app.use("/register", require("./routes/user/register.js"));
 
 app.get("/login", (req, res) => {
     res.render("login", {
@@ -68,8 +42,7 @@ app.get("/register", (req, res) => {
         locales: req.locales,
         email: "",
         username: "",
-        errs: [],
-        sitekey
+        errs: []
     });
 })
 

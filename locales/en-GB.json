@@ -18,9 +18,7 @@
     "wrongEmail": "Incorrect email address was provided!",
     "wrongUsernameLength": "Username is too short, or too long!\nIt should have a minimum of 2 characters and a maximum of 48 characters!",
     "differentPasswords": "Passwords are not the same!",
-    "tooShortPassword": "Password is too short! It should have at least 8 characters!",
-    "withoutNumberPassword": "Your password should have at least one number!",
-    "commonlyUsedPassword": "Your password is too commonly used!",
+    "tooShortOrLongPassword": "Password is too short, or too long! It should have at least 8 characters and a maximum of 64 characters!",
     "alreadyAssignedEmail": "This email adress is already assigned to another account!",
     "robot": "I'm not a robot",
     "wrongEmailOrPassword": "An invalid email or password was provided!"
